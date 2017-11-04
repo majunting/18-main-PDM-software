@@ -95,13 +95,15 @@ void main(void)
     
     while (1)
     {
-        //compute current values from ADC results, current values multiplied by 10
+        // compute current values from ADC results
+        // all current values multiplied by 10 except battery (multiplied by 5)
+        // as the battery current value might be out of range
         ADCResult = ADC_GetConversion(up_sol) * x ;
         up_sol = (ADCResult - 0.1*Vref)/40.0 ;
         ADCResult = ADC_GetConversion(clutch_sol) * x ;
         clutch_sol = (ADCResult - 0.1*Vref)/40.0 ;
         ADCResult = ADC_GetConversion(battery) * x ;
-        battery = (ADCResult - 0.5*Vref)/6.6 ;
+        battery = (ADCResult - 0.5*Vref)/3.3 ;
         ADCResult = ADC_GetConversion(radiator) * x ;
         radiator = (ADCResult - 0.1*Vref)/20.0 ;
         ADCResult = ADC_GetConversion(fuel_pump) * x ;
