@@ -95,7 +95,7 @@ typedef enum
     ewp =  0x07,
     fuel_pump =  0x06,
     drs =  0x0A,
-    starter =  0x08,
+    channel_AN8 =  0x08,
     down_sol =  0x09
 } adc_channel_t;
 

@@ -80,10 +80,58 @@ void main(void)
 
     // Disable the Peripheral Interrupts
     //INTERRUPT_PeripheralInterruptDisable();
-
+    
+    double Vref = 5000.0 ; // voltage reference 5V
+    double x = 256.0 / 4096.0 ; // convert 12-bit result to 8 bit
+    
+    uint16_t timer_prev, timer_diff ;
+    uint16_t timer_cur = TMR1_ReadTimer() ;
+    
+    uint8_t up_sol, clutch_sol, battery, radiator, 
+            fuel_pump, ewp, drs, down_sol;
+    
+    adc_result_t ADCResult ;
+    
     while (1)
     {
-        // Add your application code
+        //ADC
+        ADCResult = ADC_GetConversion(up_sol) * x ;
+        up_sol = ADCResult ;
+        ADCResult = ADC_GetConversion(clutch_sol) * x ;
+        clutch_sol = ADCResult ;
+        ADCResult = ADC_GetConversion(battery) * x ;
+        battery = ADCResult ;
+        ADCResult = ADC_GetConversion(radiator) * x ;
+        radiator = ADCResult ;
+        ADCResult = ADC_GetConversion(fuel_pump) * x ;
+        fuel_pump = ADCResult ;
+        ADCResult = ADC_GetConversion(ewp) * x ;
+        ewp = ADCResult ;
+        ADCResult = ADC_GetConversion(drs) * x ;
+        drs = ADCResult ;
+        ADCResult = ADC_GetConversion(down_sol) * x ;
+        down_sol = ADCResult ;
+        
+        timer_prev = timer_cur ;
+        timer_cur = TMR1_ReadTimer() ;
+        if (timer_cur < timer_prev) timer_diff = 0xFFFF - 
+                (timer_prev - timer_cur) ;
+        else    timer_diff = timer_cur - timer_prev ;
+        
+        uCAN_MSG cur_data1 ;
+        cur_data1.frame.idType = dSTANDARD_CAN_MSG_ID_2_0B ;
+        cur_data1.frame.id = 0x634 ; //**need to change to correct id
+        cur_data1.frame.dlc = 8 ;
+        cur_data1.frame.data0 = up_sol ;
+        cur_data1.frame.data1 = clutch_sol ;
+        cur_data1.frame.data2 = battery ;
+        cur_data1.frame.data3 = radiator ;
+        cur_data1.frame.data4 = fuel_pump ;
+        cur_data1.frame.data5 = ewp ;
+        cur_data1.frame.data6 = drs ;
+        cur_data1.frame.data7 = down_sol ;
+        
+        CAN_transmit(&cur_data1) ;
     }
 }
 /**

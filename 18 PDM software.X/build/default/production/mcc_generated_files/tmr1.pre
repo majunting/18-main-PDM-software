@@ -17987,7 +17987,7 @@ T1GCON = 0x00;
 TMR1H = 0xFF;
 
 
-TMR1L = 0xFC;
+TMR1L = 0xFF;
 
 
 timer1ReloadVal=(uint16_t)((TMR1H << 8) | TMR1L);

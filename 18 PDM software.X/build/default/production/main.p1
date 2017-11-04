@@ -2,6 +2,21 @@ Version 3.2 HI-TECH Software Intermediate Code
 [p mainexit ]
 "71 mcc_generated_files/mcc.h
 [v _SYSTEM_Initialize `(v ~T0 @X0 0 ef ]
+"195 mcc_generated_files/tmr1.h
+[v _TMR1_ReadTimer `(ui ~T0 @X0 0 ef ]
+"98 main.c
+[c E15158 28 29 30 31 0 1 4 5 7 6 10 8 9 .. ]
+[n E15158 . channel_CTMU channel_Temp_diode channel_Vdd_core channel_1_024V_bandgap up_sol clutch_sol battery radiator ewp fuel_pump drs channel_AN8 down_sol  ]
+"259 mcc_generated_files/adc.h
+[v _ADC_GetConversion `(ui ~T0 @X0 0 ef1`E15158 ]
+"69 mcc_generated_files/ecan.h
+[s S1538 `uc 1 `ul 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 ]
+[n S1538 . idType id dlc data0 data1 data2 data3 data4 data5 data6 data7 ]
+"67
+[u S1537 `S1538 1 `uc -> 14 `i ]
+[n S1537 . frame array ]
+"160
+[v _CAN_transmit `(uc ~T0 @X0 0 ef1`*S1537 ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -13588,8 +13603,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;pic18.h: 164: extern __nonreentrant void _delay(unsigned long);
 [; ;pic18.h: 166: extern __nonreentrant void _delaywdt(unsigned long);
 [; ;pic18.h: 168: extern __nonreentrant void _delay3(unsigned char);
-[; ;pin_manager.h: 112: void PIN_MANAGER_Initialize (void);
-[; ;pin_manager.h: 124: void PIN_MANAGER_IOC(void);
+[; ;pin_manager.h: 247: void PIN_MANAGER_Initialize (void);
+[; ;pin_manager.h: 259: void PIN_MANAGER_IOC(void);
 [; ;stdint.h: 13: typedef signed char int8_t;
 [; ;stdint.h: 20: typedef signed int int16_t;
 [; ;stdint.h: 38: typedef signed long int int32_t;
@@ -13615,6 +13630,18 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdbool.h: 12: typedef unsigned char bool;
 [; ;interrupt_manager.h: 110: void interrupt INTERRUPT_InterruptManager(void);
 [; ;interrupt_manager.h: 122: void INTERRUPT_Initialize (void);
+[; ;tmr1.h: 99: void TMR1_Initialize(void);
+[; ;tmr1.h: 128: void TMR1_StartTimer(void);
+[; ;tmr1.h: 160: void TMR1_StopTimer(void);
+[; ;tmr1.h: 195: uint16_t TMR1_ReadTimer(void);
+[; ;tmr1.h: 234: void TMR1_WriteTimer(uint16_t timerVal);
+[; ;tmr1.h: 270: void TMR1_Reload(void);
+[; ;tmr1.h: 309: void TMR1_StartSinglePulseAcquisition(void);
+[; ;tmr1.h: 348: uint8_t TMR1_CheckGateValueStatus(void);
+[; ;tmr1.h: 366: void TMR1_ISR(void);
+[; ;tmr1.h: 384: void TMR1_SetInterruptHandler(void (* InterruptHandler)(void));
+[; ;tmr1.h: 402: extern void (*TMR1_InterruptHandler)(void);
+[; ;tmr1.h: 420: void TMR1_DefaultInterruptHandler(void);
 [; ;ecan.h: 67: typedef union {
 [; ;ecan.h: 69: struct {
 [; ;ecan.h: 70: unsigned char idType;
@@ -13639,31 +13666,28 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;ecan.h: 230: unsigned char CAN_isBusOff(void);
 [; ;ecan.h: 254: unsigned char CAN_isRXErrorPassive(void);
 [; ;ecan.h: 278: unsigned char CAN_isTXErrorPassive(void);
-[; ;tmr1.h: 99: void TMR1_Initialize(void);
-[; ;tmr1.h: 128: void TMR1_StartTimer(void);
-[; ;tmr1.h: 160: void TMR1_StopTimer(void);
-[; ;tmr1.h: 195: uint16_t TMR1_ReadTimer(void);
-[; ;tmr1.h: 234: void TMR1_WriteTimer(uint16_t timerVal);
-[; ;tmr1.h: 270: void TMR1_Reload(void);
-[; ;tmr1.h: 309: void TMR1_StartSinglePulseAcquisition(void);
-[; ;tmr1.h: 348: uint8_t TMR1_CheckGateValueStatus(void);
-[; ;tmr1.h: 366: void TMR1_ISR(void);
-[; ;tmr1.h: 384: void TMR1_SetInterruptHandler(void (* InterruptHandler)(void));
-[; ;tmr1.h: 402: extern void (*TMR1_InterruptHandler)(void);
-[; ;tmr1.h: 420: void TMR1_DefaultInterruptHandler(void);
 [; ;adc.h: 71: typedef uint16_t adc_result_t;
 [; ;adc.h: 85: typedef enum
 [; ;adc.h: 86: {
 [; ;adc.h: 87: channel_CTMU = 0x1C,
 [; ;adc.h: 88: channel_Temp_diode = 0x1D,
 [; ;adc.h: 89: channel_Vdd_core = 0x1E,
-[; ;adc.h: 90: channel_1_024V_bandgap = 0x1F
-[; ;adc.h: 91: } adc_channel_t;
-[; ;adc.h: 126: void ADC_Initialize(void);
-[; ;adc.h: 155: void ADC_StartConversion(adc_channel_t channel);
-[; ;adc.h: 187: bool ADC_IsConversionDone();
-[; ;adc.h: 220: adc_result_t ADC_GetConversionResult(void);
-[; ;adc.h: 250: adc_result_t ADC_GetConversion(adc_channel_t channel);
+[; ;adc.h: 90: channel_1_024V_bandgap = 0x1F,
+[; ;adc.h: 91: up_sol = 0x00,
+[; ;adc.h: 92: clutch_sol = 0x01,
+[; ;adc.h: 93: battery = 0x04,
+[; ;adc.h: 94: radiator = 0x05,
+[; ;adc.h: 95: ewp = 0x07,
+[; ;adc.h: 96: fuel_pump = 0x06,
+[; ;adc.h: 97: drs = 0x0A,
+[; ;adc.h: 98: channel_AN8 = 0x08,
+[; ;adc.h: 99: down_sol = 0x09
+[; ;adc.h: 100: } adc_channel_t;
+[; ;adc.h: 135: void ADC_Initialize(void);
+[; ;adc.h: 164: void ADC_StartConversion(adc_channel_t channel);
+[; ;adc.h: 196: bool ADC_IsConversionDone();
+[; ;adc.h: 229: adc_result_t ADC_GetConversionResult(void);
+[; ;adc.h: 259: adc_result_t ADC_GetConversion(adc_channel_t channel);
 [; ;mcc.h: 71: void SYSTEM_Initialize(void);
 [; ;mcc.h: 84: void OSCILLATOR_Initialize(void);
 [v $root$_main `(v ~T0 @X0 0 e ]
@@ -13678,20 +13702,154 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;main.c: 54: SYSTEM_Initialize();
 "54
 [e ( _SYSTEM_Initialize ..  ]
-[; ;main.c: 84: while (1)
 "84
-[e :U 1541 ]
-[; ;main.c: 85: {
+[v _Vref `d ~T0 @X0 1 a ]
+[; ;main.c: 84: double Vref = 5000.0 ;
+[e = _Vref .5000.0 ]
 "85
-{
+[v _x `d ~T0 @X0 1 a ]
+[; ;main.c: 85: double x = Vref / 4096.0 ;
+[e = _x / _Vref .4096.0 ]
 "87
+[v _timer_prev `ui ~T0 @X0 1 a ]
+[v _timer_diff `ui ~T0 @X0 1 a ]
+"88
+[v _timer_cur `ui ~T0 @X0 1 a ]
+[; ;main.c: 87: uint16_t timer_prev, timer_diff ;
+[; ;main.c: 88: uint16_t timer_cur = TMR1_ReadTimer() ;
+[e = _timer_cur ( _TMR1_ReadTimer ..  ]
+[v _up_sol `ui ~T0 @X0 1 a ]
+[v _clutch_sol `ui ~T0 @X0 1 a ]
+[v _battery `ui ~T0 @X0 1 a ]
+[v _radiator `ui ~T0 @X0 1 a ]
+[v _fuel_pump `ui ~T0 @X0 1 a ]
+[v _ewp `ui ~T0 @X0 1 a ]
+[v _drs `ui ~T0 @X0 1 a ]
+[v _down_sol `ui ~T0 @X0 1 a ]
+"93
+[v _ADCResult `ui ~T0 @X0 1 a ]
+[; ;main.c: 90: uint16_t up_sol, clutch_sol, battery, radiator,
+[; ;main.c: 91: fuel_pump, ewp, drs, down_sol;
+[; ;main.c: 93: adc_result_t ADCResult ;
+[; ;main.c: 95: while (1)
+"95
+[e :U 1541 ]
+[; ;main.c: 96: {
+"96
+{
+[; ;main.c: 98: ADCResult = ADC_GetConversion(up_sol) * x ;
+"98
+[e = _ADCResult -> * -> ( _ADC_GetConversion (1 -> _up_sol `E15158 `d _x `ui ]
+[; ;main.c: 99: up_sol = ADCResult ;
+"99
+[e = _up_sol _ADCResult ]
+[; ;main.c: 100: ADCResult = ADC_GetConversion(clutch_sol) * x ;
+"100
+[e = _ADCResult -> * -> ( _ADC_GetConversion (1 -> _clutch_sol `E15158 `d _x `ui ]
+[; ;main.c: 101: clutch_sol = ADCResult ;
+"101
+[e = _clutch_sol _ADCResult ]
+[; ;main.c: 102: ADCResult = ADC_GetConversion(battery) * x ;
+"102
+[e = _ADCResult -> * -> ( _ADC_GetConversion (1 -> _battery `E15158 `d _x `ui ]
+[; ;main.c: 103: battery = ADCResult ;
+"103
+[e = _battery _ADCResult ]
+[; ;main.c: 104: ADCResult = ADC_GetConversion(radiator) * x ;
+"104
+[e = _ADCResult -> * -> ( _ADC_GetConversion (1 -> _radiator `E15158 `d _x `ui ]
+[; ;main.c: 105: radiator = ADCResult ;
+"105
+[e = _radiator _ADCResult ]
+[; ;main.c: 106: ADCResult = ADC_GetConversion(fuel_pump) * x ;
+"106
+[e = _ADCResult -> * -> ( _ADC_GetConversion (1 -> _fuel_pump `E15158 `d _x `ui ]
+[; ;main.c: 107: fuel_pump = ADCResult ;
+"107
+[e = _fuel_pump _ADCResult ]
+[; ;main.c: 108: ADCResult = ADC_GetConversion(ewp) * x ;
+"108
+[e = _ADCResult -> * -> ( _ADC_GetConversion (1 -> _ewp `E15158 `d _x `ui ]
+[; ;main.c: 109: ewp = ADCResult ;
+"109
+[e = _ewp _ADCResult ]
+[; ;main.c: 110: ADCResult = ADC_GetConversion(drs) * x ;
+"110
+[e = _ADCResult -> * -> ( _ADC_GetConversion (1 -> _drs `E15158 `d _x `ui ]
+[; ;main.c: 111: drs = ADCResult ;
+"111
+[e = _drs _ADCResult ]
+[; ;main.c: 112: ADCResult = ADC_GetConversion(down_sol) * x ;
+"112
+[e = _ADCResult -> * -> ( _ADC_GetConversion (1 -> _down_sol `E15158 `d _x `ui ]
+[; ;main.c: 113: down_sol = ADCResult ;
+"113
+[e = _down_sol _ADCResult ]
+[; ;main.c: 115: timer_prev = timer_cur ;
+"115
+[e = _timer_prev _timer_cur ]
+[; ;main.c: 116: timer_cur = TMR1_ReadTimer() ;
+"116
+[e = _timer_cur ( _TMR1_ReadTimer ..  ]
+[; ;main.c: 117: if (timer_cur < timer_prev) timer_diff = 0xFFFF -
+"117
+[e $ ! < _timer_cur _timer_prev 1543  ]
+[; ;main.c: 118: (timer_prev - timer_cur) ;
+"118
+[e = _timer_diff - -> 65535 `ui - _timer_prev _timer_cur ]
+[e $U 1544  ]
+"119
+[e :U 1543 ]
+[; ;main.c: 119: else timer_diff = timer_cur - timer_prev ;
+[e = _timer_diff - _timer_cur _timer_prev ]
+[e :U 1544 ]
+"121
+[v _cur_data1 `S1537 ~T0 @X0 1 a ]
+[; ;main.c: 121: uCAN_MSG cur_data1 ;
+[; ;main.c: 122: cur_data1.frame.idType = 1 ;
+"122
+[e = . . _cur_data1 0 0 -> -> 1 `i `uc ]
+[; ;main.c: 123: cur_data1.frame.id = 0x634 ;
+"123
+[e = . . _cur_data1 0 1 -> -> -> 1588 `i `l `ul ]
+[; ;main.c: 124: cur_data1.frame.dlc = 8 ;
+"124
+[e = . . _cur_data1 0 2 -> -> 8 `i `uc ]
+[; ;main.c: 125: cur_data1.frame.data0 = up_sol ;
+"125
+[e = . . _cur_data1 0 3 -> _up_sol `uc ]
+[; ;main.c: 126: cur_data1.frame.data1 = clutch_sol ;
+"126
+[e = . . _cur_data1 0 4 -> _clutch_sol `uc ]
+[; ;main.c: 127: cur_data1.frame.data2 = battery ;
+"127
+[e = . . _cur_data1 0 5 -> _battery `uc ]
+[; ;main.c: 128: cur_data1.frame.data3 = radiator ;
+"128
+[e = . . _cur_data1 0 6 -> _radiator `uc ]
+[; ;main.c: 129: cur_data1.frame.data4 = fuel_pump ;
+"129
+[e = . . _cur_data1 0 7 -> _fuel_pump `uc ]
+[; ;main.c: 130: cur_data1.frame.data5 = ewp ;
+"130
+[e = . . _cur_data1 0 8 -> _ewp `uc ]
+[; ;main.c: 131: cur_data1.frame.data6 = drs ;
+"131
+[e = . . _cur_data1 0 9 -> _drs `uc ]
+[; ;main.c: 132: cur_data1.frame.data7 = down_sol ;
+"132
+[e = . . _cur_data1 0 10 -> _down_sol `uc ]
+[; ;main.c: 134: CAN_transmit(&cur_data1) ;
+"134
+[e ( _CAN_transmit (1 &U _cur_data1 ]
+"135
 }
 [e :U 1540 ]
-"84
+"95
 [e $U 1541  ]
 [e :U 1542 ]
-[; ;main.c: 87: }
-[; ;main.c: 88: }
-"88
+[; ;main.c: 135: }
+[; ;main.c: 136: }
+"136
 [e :UE 1539 ]
 }

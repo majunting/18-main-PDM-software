@@ -17857,10 +17857,10 @@ extern __nonreentrant void _delaywdt(unsigned long);
 #pragma intrinsic(_delay3)
 extern __nonreentrant void _delay3(unsigned char);
 
-# 112 "mcc_generated_files/pin_manager.h"
+# 247 "mcc_generated_files/pin_manager.h"
 void PIN_MANAGER_Initialize (void);
 
-# 124
+# 259
 void PIN_MANAGER_IOC(void);
 
 # 13 "D:\Atmel\xc8\include\stdint.h"
@@ -17944,6 +17944,42 @@ void interrupt INTERRUPT_InterruptManager(void);
 # 122
 void INTERRUPT_Initialize (void);
 
+# 99 "mcc_generated_files/tmr1.h"
+void TMR1_Initialize(void);
+
+# 128
+void TMR1_StartTimer(void);
+
+# 160
+void TMR1_StopTimer(void);
+
+# 195
+uint16_t TMR1_ReadTimer(void);
+
+# 234
+void TMR1_WriteTimer(uint16_t timerVal);
+
+# 270
+void TMR1_Reload(void);
+
+# 309
+void TMR1_StartSinglePulseAcquisition(void);
+
+# 348
+uint8_t TMR1_CheckGateValueStatus(void);
+
+# 366
+void TMR1_ISR(void);
+
+# 384
+void TMR1_SetInterruptHandler(void (* InterruptHandler)(void));
+
+# 402
+extern void (*TMR1_InterruptHandler)(void);
+
+# 420
+void TMR1_DefaultInterruptHandler(void);
+
 # 67 "mcc_generated_files/ecan.h"
 typedef union {
 
@@ -17987,42 +18023,6 @@ unsigned char CAN_isRXErrorPassive(void);
 # 278
 unsigned char CAN_isTXErrorPassive(void);
 
-# 99 "mcc_generated_files/tmr1.h"
-void TMR1_Initialize(void);
-
-# 128
-void TMR1_StartTimer(void);
-
-# 160
-void TMR1_StopTimer(void);
-
-# 195
-uint16_t TMR1_ReadTimer(void);
-
-# 234
-void TMR1_WriteTimer(uint16_t timerVal);
-
-# 270
-void TMR1_Reload(void);
-
-# 309
-void TMR1_StartSinglePulseAcquisition(void);
-
-# 348
-uint8_t TMR1_CheckGateValueStatus(void);
-
-# 366
-void TMR1_ISR(void);
-
-# 384
-void TMR1_SetInterruptHandler(void (* InterruptHandler)(void));
-
-# 402
-extern void (*TMR1_InterruptHandler)(void);
-
-# 420
-void TMR1_DefaultInterruptHandler(void);
-
 # 71 "mcc_generated_files/adc.h"
 typedef uint16_t adc_result_t;
 
@@ -18032,22 +18032,31 @@ typedef enum
 channel_CTMU = 0x1C,
 channel_Temp_diode = 0x1D,
 channel_Vdd_core = 0x1E,
-channel_1_024V_bandgap = 0x1F
+channel_1_024V_bandgap = 0x1F,
+up_sol = 0x00,
+clutch_sol = 0x01,
+battery = 0x04,
+radiator = 0x05,
+ewp = 0x07,
+fuel_pump = 0x06,
+drs = 0x0A,
+channel_AN8 = 0x08,
+down_sol = 0x09
 } adc_channel_t;
 
-# 126
+# 135
 void ADC_Initialize(void);
 
-# 155
+# 164
 void ADC_StartConversion(adc_channel_t channel);
 
-# 187
+# 196
 bool ADC_IsConversionDone();
 
-# 220
+# 229
 adc_result_t ADC_GetConversionResult(void);
 
-# 250
+# 259
 adc_result_t ADC_GetConversion(adc_channel_t channel);
 
 # 71 "mcc_generated_files/mcc.h"
@@ -18063,9 +18072,57 @@ void main(void)
 SYSTEM_Initialize();
 
 # 84
+double Vref = 5000.0 ;
+double x = Vref / 4096.0 ;
+
+uint16_t timer_prev, timer_diff ;
+uint16_t timer_cur = TMR1_ReadTimer() ;
+
+uint16_t up_sol, clutch_sol, battery, radiator,
+fuel_pump, ewp, drs, down_sol;
+
+adc_result_t ADCResult ;
+
 while (1)
 {
 
+ADCResult = ADC_GetConversion(up_sol) * x ;
+up_sol = ADCResult ;
+ADCResult = ADC_GetConversion(clutch_sol) * x ;
+clutch_sol = ADCResult ;
+ADCResult = ADC_GetConversion(battery) * x ;
+battery = ADCResult ;
+ADCResult = ADC_GetConversion(radiator) * x ;
+radiator = ADCResult ;
+ADCResult = ADC_GetConversion(fuel_pump) * x ;
+fuel_pump = ADCResult ;
+ADCResult = ADC_GetConversion(ewp) * x ;
+ewp = ADCResult ;
+ADCResult = ADC_GetConversion(drs) * x ;
+drs = ADCResult ;
+ADCResult = ADC_GetConversion(down_sol) * x ;
+down_sol = ADCResult ;
+
+timer_prev = timer_cur ;
+timer_cur = TMR1_ReadTimer() ;
+if (timer_cur < timer_prev) timer_diff = 0xFFFF -
+(timer_prev - timer_cur) ;
+else timer_diff = timer_cur - timer_prev ;
+
+uCAN_MSG cur_data1 ;
+cur_data1.frame.idType = 1 ;
+cur_data1.frame.id = 0x634 ;
+cur_data1.frame.dlc = 8 ;
+cur_data1.frame.data0 = up_sol ;
+cur_data1.frame.data1 = clutch_sol ;
+cur_data1.frame.data2 = battery ;
+cur_data1.frame.data3 = radiator ;
+cur_data1.frame.data4 = fuel_pump ;
+cur_data1.frame.data5 = ewp ;
+cur_data1.frame.data6 = drs ;
+cur_data1.frame.data7 = down_sol ;
+
+CAN_transmit(&cur_data1) ;
 }
 }
 

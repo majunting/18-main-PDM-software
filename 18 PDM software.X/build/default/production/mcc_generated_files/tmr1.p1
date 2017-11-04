@@ -13718,9 +13718,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;tmr1.c: 74: TMR1H = 0xFF;
 "74
 [e = _TMR1H -> -> 255 `i `uc ]
-[; ;tmr1.c: 77: TMR1L = 0xFC;
+[; ;tmr1.c: 77: TMR1L = 0xFF;
 "77
-[e = _TMR1L -> -> 252 `i `uc ]
+[e = _TMR1L -> -> 255 `i `uc ]
 [; ;tmr1.c: 80: timer1ReloadVal=(uint16_t)((TMR1H << 8) | TMR1L);
 "80
 [e = _timer1ReloadVal -> | << -> _TMR1H `i -> 8 `i -> _TMR1L `i `ui ]

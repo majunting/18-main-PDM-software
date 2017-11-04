@@ -17941,22 +17941,31 @@ typedef enum
 channel_CTMU = 0x1C,
 channel_Temp_diode = 0x1D,
 channel_Vdd_core = 0x1E,
-channel_1_024V_bandgap = 0x1F
+channel_1_024V_bandgap = 0x1F,
+up_sol = 0x00,
+clutch_sol = 0x01,
+battery = 0x04,
+radiator = 0x05,
+ewp = 0x07,
+fuel_pump = 0x06,
+drs = 0x0A,
+channel_AN8 = 0x08,
+down_sol = 0x09
 } adc_channel_t;
 
-# 126
+# 135
 void ADC_Initialize(void);
 
-# 155
+# 164
 void ADC_StartConversion(adc_channel_t channel);
 
-# 187
+# 196
 bool ADC_IsConversionDone();
 
-# 220
+# 229
 adc_result_t ADC_GetConversionResult(void);
 
-# 250
+# 259
 adc_result_t ADC_GetConversion(adc_channel_t channel);
 
 # 58 "mcc_generated_files/adc.c"
