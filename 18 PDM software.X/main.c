@@ -82,13 +82,14 @@ void main(void)
     //INTERRUPT_PeripheralInterruptDisable();
     
     double Vref = 5000.0 ; // voltage reference 5V
-    double x = 256.0 / 4096.0 ; // convert 12-bit result to 8 bit
+    double x = Vref / 4096.0 ; // convert 12-bit result to 8 bit
     
 //    uint16_t timer_prev, timer_diff ;
 //    uint16_t timer_cur = TMR1_ReadTimer() ;
     
-    uint8_t up_sol, clutch_sol, battery, radiator, 
+    uint8_t up_sol, clutch_sol, radiator, 
             fuel_pump, ewp, drs, down_sol;
+    int8_t battery ;
     
     adc_result_t ADCResult ;
     
@@ -96,21 +97,21 @@ void main(void)
     {
         //ADC
         ADCResult = ADC_GetConversion(up_sol) * x ;
-        up_sol = ADCResult ;
+        up_sol = (ADCResult - 0.1*Vref)/40.0 ;
         ADCResult = ADC_GetConversion(clutch_sol) * x ;
-        clutch_sol = ADCResult ;
+        clutch_sol = (ADCResult - 0.1*Vref)/40.0 ;
         ADCResult = ADC_GetConversion(battery) * x ;
-        battery = ADCResult ;
+        battery = (ADCResult - 0.5*Vref)/6.6 ;
         ADCResult = ADC_GetConversion(radiator) * x ;
-        radiator = ADCResult ;
+        radiator = (ADCResult - 0.1*Vref)/20.0 ;
         ADCResult = ADC_GetConversion(fuel_pump) * x ;
-        fuel_pump = ADCResult ;
+        fuel_pump = (ADCResult - 0.1*Vref)/40.0 ;
         ADCResult = ADC_GetConversion(ewp) * x ;
-        ewp = ADCResult ;
+        ewp = (ADCResult - 0.1*Vref)/40.0 ;
         ADCResult = ADC_GetConversion(drs) * x ;
-        drs = ADCResult ;
+        drs = (ADCResult - 0.1*Vref)/40.0 ;
         ADCResult = ADC_GetConversion(down_sol) * x ;
-        down_sol = ADCResult ;
+        down_sol = (ADCResult - 0.1*Vref)/40.0 ;
         
 //        timer_prev = timer_cur ;
 //        timer_cur = TMR1_ReadTimer() ;
@@ -120,7 +121,7 @@ void main(void)
         
         uCAN_MSG cur_data1 ;
         cur_data1.frame.idType = dSTANDARD_CAN_MSG_ID_2_0B ;
-        cur_data1.frame.id = 0x634 ; //**need to change to correct id
+        cur_data1.frame.id = 0x634 ;
         cur_data1.frame.dlc = 8 ;
         cur_data1.frame.data0 = up_sol ;
         cur_data1.frame.data1 = clutch_sol ;

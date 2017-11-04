@@ -18075,11 +18075,12 @@ SYSTEM_Initialize();
 double Vref = 5000.0 ;
 double x = Vref / 4096.0 ;
 
-uint16_t timer_prev, timer_diff ;
-uint16_t timer_cur = TMR1_ReadTimer() ;
 
-uint16_t up_sol, clutch_sol, battery, radiator,
+
+
+uint8_t up_sol, clutch_sol, radiator,
 fuel_pump, ewp, drs, down_sol;
+int8_t battery ;
 
 adc_result_t ADCResult ;
 
@@ -18087,28 +18088,23 @@ while (1)
 {
 
 ADCResult = ADC_GetConversion(up_sol) * x ;
-up_sol = ADCResult ;
+up_sol = (ADCResult - 0.1*Vref)/40.0 ;
 ADCResult = ADC_GetConversion(clutch_sol) * x ;
-clutch_sol = ADCResult ;
+clutch_sol = (ADCResult - 0.1*Vref)/40.0 ;
 ADCResult = ADC_GetConversion(battery) * x ;
-battery = ADCResult ;
+battery = (ADCResult - 0.5*Vref)/6.6 ;
 ADCResult = ADC_GetConversion(radiator) * x ;
-radiator = ADCResult ;
+radiator = (ADCResult - 0.1*Vref)/20.0 ;
 ADCResult = ADC_GetConversion(fuel_pump) * x ;
-fuel_pump = ADCResult ;
+fuel_pump = (ADCResult - 0.1*Vref)/40.0 ;
 ADCResult = ADC_GetConversion(ewp) * x ;
-ewp = ADCResult ;
+ewp = (ADCResult - 0.1*Vref)/40.0 ;
 ADCResult = ADC_GetConversion(drs) * x ;
-drs = ADCResult ;
+drs = (ADCResult - 0.1*Vref)/40.0 ;
 ADCResult = ADC_GetConversion(down_sol) * x ;
-down_sol = ADCResult ;
+down_sol = (ADCResult - 0.1*Vref)/40.0 ;
 
-timer_prev = timer_cur ;
-timer_cur = TMR1_ReadTimer() ;
-if (timer_cur < timer_prev) timer_diff = 0xFFFF -
-(timer_prev - timer_cur) ;
-else timer_diff = timer_cur - timer_prev ;
-
+# 122
 uCAN_MSG cur_data1 ;
 cur_data1.frame.idType = 1 ;
 cur_data1.frame.id = 0x634 ;
