@@ -11,6 +11,11 @@
 # All addresses and the length are given in unqualified hexadecimal
 # in delta units.  Any other numeric values are decimal.
 %PSECTS
+$C:\Users\haoye\AppData\Local\Temp\s4fg.obj
+idloc IDLOC 0 200000 200000 8 1
+init CODE 0 8A 8A 4 1
+reset_vec CODE 0 0 0 4 1
+config CONFIG 0 300000 300000 E 1
 $dist/default/production\18_PDM_software.X.production.obj
 cinit CODE 0 1404 1404 E 1
 text0 CODE 0 8E 8E 6FA 1
@@ -40,11 +45,6 @@ cstackCOMRAM COMRAM 1 1 1 4A 1
 cstackBANK0 BANK0 1 60 60 29 1
 temp COMRAM 1 4F 4F 1 1
 intcode CODE 0 8 8 82 1
-$C:\Users\haoye\AppData\Local\Temp\s4to.obj
-idloc IDLOC 0 200000 200000 8 1
-init CODE 0 8A 8A 4 1
-reset_vec CODE 0 0 0 4 1
-config CONFIG 0 300000 300000 E 1
 # %UNUSED Section
 # This section enumerates the unused ranges of each CLASS. Each entry
 # is described on a single line as follows:
@@ -464,16 +464,16 @@ CC text0 CODE >99:C:\Users\haoye\Google Drive\18 Electronics\18 PDM\main PDM pro
 776 text0 CODE >133:C:\Users\haoye\Google Drive\18 Electronics\18 PDM\main PDM program\18 PDM software.X\main.c
 77A text0 CODE >135:C:\Users\haoye\Google Drive\18 Electronics\18 PDM\main PDM program\18 PDM software.X\main.c
 786 text0 CODE >96:C:\Users\haoye\Google Drive\18 Electronics\18 PDM\main PDM program\18 PDM software.X\main.c
-1404 cinit CODE >6947:C:\Users\haoye\AppData\Local\Temp\s4to.
-1404 cinit CODE >6949:C:\Users\haoye\AppData\Local\Temp\s4to.
-1404 cinit CODE >6952:C:\Users\haoye\AppData\Local\Temp\s4to.
-1404 cinit CODE >6958:C:\Users\haoye\AppData\Local\Temp\s4to.
-1404 cinit CODE >6960:C:\Users\haoye\AppData\Local\Temp\s4to.
-1406 cinit CODE >6961:C:\Users\haoye\AppData\Local\Temp\s4to.
-1408 cinit CODE >6963:C:\Users\haoye\AppData\Local\Temp\s4to.
-140A cinit CODE >6964:C:\Users\haoye\AppData\Local\Temp\s4to.
-140C cinit CODE >6965:C:\Users\haoye\AppData\Local\Temp\s4to.
-140E cinit CODE >6966:C:\Users\haoye\AppData\Local\Temp\s4to.
+1404 cinit CODE >6947:C:\Users\haoye\AppData\Local\Temp\s4fg.
+1404 cinit CODE >6949:C:\Users\haoye\AppData\Local\Temp\s4fg.
+1404 cinit CODE >6952:C:\Users\haoye\AppData\Local\Temp\s4fg.
+1404 cinit CODE >6958:C:\Users\haoye\AppData\Local\Temp\s4fg.
+1404 cinit CODE >6960:C:\Users\haoye\AppData\Local\Temp\s4fg.
+1406 cinit CODE >6961:C:\Users\haoye\AppData\Local\Temp\s4fg.
+1408 cinit CODE >6963:C:\Users\haoye\AppData\Local\Temp\s4fg.
+140A cinit CODE >6964:C:\Users\haoye\AppData\Local\Temp\s4fg.
+140C cinit CODE >6965:C:\Users\haoye\AppData\Local\Temp\s4fg.
+140E cinit CODE >6966:C:\Users\haoye\AppData\Local\Temp\s4fg.
 # %SYMTAB Section
 # An enumeration of all symbols in the program.
 # The beginning of the section is indicated by %SYMTAB.
@@ -501,7 +501,7 @@ _RXM1SIDH EFC 0 ABS 0 - dist/default/production\18_PDM_software.X.production.obj
 _RXM1SIDL EFD 0 ABS 0 - dist/default/production\18_PDM_software.X.production.obj
 ___ftdiv@exp 45 0 COMRAM 1 cstackCOMRAM dist/default/production\18_PDM_software.X.production.obj
 __Hibigdata 0 0 CODE 0 ibigdata dist/default/production\18_PDM_software.X.production.obj
-__mediumconst 0 0 MEDIUMCONST 0 mediumconst C:\Users\haoye\AppData\Local\Temp\s4to.obj
+__mediumconst 0 0 MEDIUMCONST 0 mediumconst C:\Users\haoye\AppData\Local\Temp\s4fg.obj
 __Heeprom_data 0 0 EEDATA 0 eeprom_data dist/default/production\18_PDM_software.X.production.obj
 __end_of_INTERRUPT_Initialize 1424 0 CODE 0 text14 dist/default/production\18_PDM_software.X.production.obj
 __CFG_MCLRE$ON 0 0 ABS 0 - dist/default/production\18_PDM_software.X.production.obj
@@ -515,13 +515,13 @@ _LATC F8B 0 ABS 0 - dist/default/production\18_PDM_software.X.production.obj
 _LATD F8C 0 ABS 0 - dist/default/production\18_PDM_software.X.production.obj
 _LATE F8D 0 ABS 0 - dist/default/production\18_PDM_software.X.production.obj
 _WPUB F5B 0 ABS 0 - dist/default/production\18_PDM_software.X.production.obj
-___sp 0 0 STACK 2 stack C:\Users\haoye\AppData\Local\Temp\s4to.obj
+___sp 0 0 STACK 2 stack C:\Users\haoye\AppData\Local\Temp\s4fg.obj
 _main 8E 0 CODE 0 text0 dist/default/production\18_PDM_software.X.production.obj
 btemp 4F 0 COMRAM 1 temp dist/default/production\18_PDM_software.X.production.obj
 __end_of_ADC_GetConversion 1350 0 CODE 0 text19 dist/default/production\18_PDM_software.X.production.obj
 ___ftadd@f1 2C 0 COMRAM 1 cstackCOMRAM dist/default/production\18_PDM_software.X.production.obj
 ___ftadd@f2 2F 0 COMRAM 1 cstackCOMRAM dist/default/production\18_PDM_software.X.production.obj
-start 8A 0 CODE 0 init C:\Users\haoye\AppData\Local\Temp\s4to.obj
+start 8A 0 CODE 0 init C:\Users\haoye\AppData\Local\Temp\s4fg.obj
 __size_of___ftadd 0 0 ABS 0 - dist/default/production\18_PDM_software.X.production.obj
 __size_of___ftdiv 0 0 ABS 0 - dist/default/production\18_PDM_software.X.production.obj
 __size_of___ftmul 0 0 ABS 0 - dist/default/production\18_PDM_software.X.production.obj
@@ -538,11 +538,11 @@ __size_of_TMR1_Initialize 0 0 ABS 0 - dist/default/production\18_PDM_software.X.
 __size_of_TMR1_StartTimer 0 0 ABS 0 - dist/default/production\18_PDM_software.X.production.obj
 __LnvCOMRAM 0 0 ABS 0 nvCOMRAM dist/default/production\18_PDM_software.X.production.obj
 __size_of_SYSTEM_Initialize 0 0 ABS 0 - dist/default/production\18_PDM_software.X.production.obj
-__accesstop 60 0 ABS 0 - C:\Users\haoye\AppData\Local\Temp\s4to.obj
-intlevel0 0 0 CODE 0 text C:\Users\haoye\AppData\Local\Temp\s4to.obj
-intlevel1 0 0 CODE 0 text C:\Users\haoye\AppData\Local\Temp\s4to.obj
-intlevel2 0 0 CODE 0 text C:\Users\haoye\AppData\Local\Temp\s4to.obj
-intlevel3 0 0 CODE 0 text C:\Users\haoye\AppData\Local\Temp\s4to.obj
+__accesstop 60 0 ABS 0 - C:\Users\haoye\AppData\Local\Temp\s4fg.obj
+intlevel0 0 0 CODE 0 text C:\Users\haoye\AppData\Local\Temp\s4fg.obj
+intlevel1 0 0 CODE 0 text C:\Users\haoye\AppData\Local\Temp\s4fg.obj
+intlevel2 0 0 CODE 0 text C:\Users\haoye\AppData\Local\Temp\s4fg.obj
+intlevel3 0 0 CODE 0 text C:\Users\haoye\AppData\Local\Temp\s4fg.obj
 __size_of_ADC_Initialize 0 0 ABS 0 - dist/default/production\18_PDM_software.X.production.obj
 __end_of_convertCANid2Reg E10 0 CODE 0 text18 dist/default/production\18_PDM_software.X.production.obj
 __LnvFARRAM 0 0 FARRAM 0 nvFARRAM dist/default/production\18_PDM_software.X.production.obj
@@ -570,8 +570,8 @@ _ANCON0 F5D 0 ABS 0 - dist/default/production\18_PDM_software.X.production.obj
 _ANCON1 F5C 0 ABS 0 - dist/default/production\18_PDM_software.X.production.obj
 convertCANid2Reg@tempPassedInID F 0 COMRAM 1 cstackCOMRAM dist/default/production\18_PDM_software.X.production.obj
 __end_of_ECAN_Initialize 1120 0 CODE 0 text15 dist/default/production\18_PDM_software.X.production.obj
-___inthi_sp 0 0 STACK 2 stack C:\Users\haoye\AppData\Local\Temp\s4to.obj
-___intlo_sp 0 0 STACK 2 stack C:\Users\haoye\AppData\Local\Temp\s4to.obj
+___inthi_sp 0 0 STACK 2 stack C:\Users\haoye\AppData\Local\Temp\s4fg.obj
+___intlo_sp 0 0 STACK 2 stack C:\Users\haoye\AppData\Local\Temp\s4fg.obj
 _CANCON F6F 0 ABS 0 - dist/default/production\18_PDM_software.X.production.obj
 __end_of_INTERRUPT_InterruptManager 8A 0 CODE 0 intcode dist/default/production\18_PDM_software.X.production.obj
 __size_of_TMR1_SetInterruptHandler 0 0 ABS 0 - dist/default/production\18_PDM_software.X.production.obj
@@ -696,7 +696,7 @@ __Hbank14 0 0 ABS 0 bank14 dist/default/production\18_PDM_software.X.production.
 __Hbigbss 0 0 BIGRAM 1 bigbss dist/default/production\18_PDM_software.X.production.obj
 __Hbigram 0 0 ABS 0 bigram dist/default/production\18_PDM_software.X.production.obj
 __end_of_CAN_transmit AC6 0 CODE 0 text17 dist/default/production\18_PDM_software.X.production.obj
-__smallconst 0 0 SMALLCONST 0 smallconst C:\Users\haoye\AppData\Local\Temp\s4to.obj
+__smallconst 0 0 SMALLCONST 0 smallconst C:\Users\haoye\AppData\Local\Temp\s4fg.obj
 __Hcomram 0 0 ABS 0 comram dist/default/production\18_PDM_software.X.production.obj
 __Hconfig 30000E 0 CONFIG 0 config dist/default/production\18_PDM_software.X.production.obj
 ___lwtoft 137A 0 CODE 0 text1 dist/default/production\18_PDM_software.X.production.obj
@@ -841,8 +841,8 @@ main@Vref 76 0 BANK0 1 cstackBANK0 dist/default/production\18_PDM_software.X.pro
 __Lfarbss 0 0 FARRAM 0 farbss dist/default/production\18_PDM_software.X.production.obj
 __Lfardata 0 0 FARRAM 0 fardata dist/default/production\18_PDM_software.X.production.obj
 ___lwtoft@c 17 0 COMRAM 1 cstackCOMRAM dist/default/production\18_PDM_software.X.production.obj
-stackhi E40 0 ABS 0 - C:\Users\haoye\AppData\Local\Temp\s4to.obj
-stacklo 89 0 ABS 0 - C:\Users\haoye\AppData\Local\Temp\s4to.obj
+stackhi E40 0 ABS 0 - C:\Users\haoye\AppData\Local\Temp\s4fg.obj
+stacklo 89 0 ABS 0 - C:\Users\haoye\AppData\Local\Temp\s4fg.obj
 __Lintcode 8 0 CODE 0 intcode dist/default/production\18_PDM_software.X.production.obj
 _OSCCON2 FD2 0 ABS 0 - dist/default/production\18_PDM_software.X.production.obj
 _OSCTUNE F9B 0 ABS 0 - dist/default/production\18_PDM_software.X.production.obj
@@ -918,7 +918,7 @@ __Ltext19 0 0 ABS 0 text19 dist/default/production\18_PDM_software.X.production.
 __Ltext21 0 0 ABS 0 text21 dist/default/production\18_PDM_software.X.production.obj
 __Ltext22 0 0 ABS 0 text22 dist/default/production\18_PDM_software.X.production.obj
 __Ltext23 0 0 ABS 0 text23 dist/default/production\18_PDM_software.X.production.obj
-__ramtop F00 0 RAM 0 ramtop C:\Users\haoye\AppData\Local\Temp\s4to.obj
+__ramtop F00 0 RAM 0 ramtop C:\Users\haoye\AppData\Local\Temp\s4fg.obj
 __Lpowerup 8A 0 CODE 0 powerup dist/default/production\18_PDM_software.X.production.obj
 __Leeprom_data 0 0 EEDATA 0 eeprom_data dist/default/production\18_PDM_software.X.production.obj
 _TXB1CONbits F10 0 ABS 0 - dist/default/production\18_PDM_software.X.production.obj

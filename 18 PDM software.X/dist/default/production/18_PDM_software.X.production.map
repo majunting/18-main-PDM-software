@@ -5,7 +5,7 @@ Linker command line:
 -W-3 --edf=D:\Atmel\xc8\dat\en_msgs.txt -cs \
   -h+dist/default/production\18_PDM_software.X.production.sym \
   --cmf=dist/default/production\18_PDM_software.X.production.cmf -z \
-  -Q18F45K80 -oC:\Users\haoye\AppData\Local\Temp\s4to.2 \
+  -Q18F45K80 -oC:\Users\haoye\AppData\Local\Temp\s4fg.2 \
   -Mdist/default/production/18_PDM_software.X.production.map -E1 -ver=XC8 \
   -ASTACK=089h-0e40h -pstack=STACK -ACODE=00h-07FFFh -ACONST=00h-07FFFh \
   -ASMALLCONST=0F00h-0FFFhx113 -AMEDIUMCONST=0F00h-07FFFh -ACOMRAM=01h-05Fh \
@@ -26,7 +26,7 @@ Linker command line:
   -pfarbss=FARRAM,fardata=FARRAM,nvFARRAM=FARRAM \
   -pintsave_regs=BIGRAM,bigbss=BIGRAM,bigdata=BIGRAM -pbss=RAM \
   -pidata=CODE,irdata=CODE,ibigdata=CODE,ifardata=CODE -prparam=COMRAM \
-  C:\Users\haoye\AppData\Local\Temp\s4to.obj \
+  C:\Users\haoye\AppData\Local\Temp\s4fg.obj \
   dist/default/production\18_PDM_software.X.production.obj 
 
 Object code version is 3.11
@@ -39,7 +39,7 @@ Call graph: (short form)
 
 
                 Name                               Link     Load   Length Selector   Space Scale
-C:\Users\haoye\AppData\Local\Temp\s4to.obj
+C:\Users\haoye\AppData\Local\Temp\s4fg.obj
                 init                                 8A       8A        4        4       0
                 reset_vec                             0        0        4        0       0
                 idloc                            200000   200000        8   200000       0

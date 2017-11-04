@@ -95,7 +95,7 @@ void main(void)
     
     while (1)
     {
-        //ADC
+        //compute current values from ADC results, current values multiplied by 10
         ADCResult = ADC_GetConversion(up_sol) * x ;
         up_sol = (ADCResult - 0.1*Vref)/40.0 ;
         ADCResult = ADC_GetConversion(clutch_sol) * x ;
