@@ -84,8 +84,8 @@ void main(void)
     double Vref = 5000.0 ; // voltage reference 5V
     double x = 256.0 / 4096.0 ; // convert 12-bit result to 8 bit
     
-    uint16_t timer_prev, timer_diff ;
-    uint16_t timer_cur = TMR1_ReadTimer() ;
+//    uint16_t timer_prev, timer_diff ;
+//    uint16_t timer_cur = TMR1_ReadTimer() ;
     
     uint8_t up_sol, clutch_sol, battery, radiator, 
             fuel_pump, ewp, drs, down_sol;
@@ -112,11 +112,11 @@ void main(void)
         ADCResult = ADC_GetConversion(down_sol) * x ;
         down_sol = ADCResult ;
         
-        timer_prev = timer_cur ;
-        timer_cur = TMR1_ReadTimer() ;
-        if (timer_cur < timer_prev) timer_diff = 0xFFFF - 
-                (timer_prev - timer_cur) ;
-        else    timer_diff = timer_cur - timer_prev ;
+//        timer_prev = timer_cur ;
+//        timer_cur = TMR1_ReadTimer() ;
+//        if (timer_cur < timer_prev) timer_diff = 0xFFFF - 
+//                (timer_prev - timer_cur) ;
+//        else    timer_diff = timer_cur - timer_prev ;
         
         uCAN_MSG cur_data1 ;
         cur_data1.frame.idType = dSTANDARD_CAN_MSG_ID_2_0B ;
